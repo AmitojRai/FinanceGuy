@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.financeguy.controller.MainViewController">
+
+    <!-- MenuBar at the top -->
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Load Sample Data" onAction="#handleLoadSampleData"/>
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Edit">
+                <MenuItem text="Clear All Data" onAction="#handleClearAllData"/>
+            </Menu>
+            <!-- Additional menus can be added here -->
+        </MenuBar>
+    </top>
+
+    <!-- Center content -->
+    <center>
+        <VBox spacing="10" VBox.vgrow="ALWAYS">
+            <!-- Define padding using <Insets> -->
+            <padding>
+                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+            </padding>
+
+            <!-- ToolBar with action buttons and filters -->
+            <ToolBar>
+                <Button text="Add Expense" onAction="#handleAddExpense"/>
+                <Button text="Edit Expense" onAction="#handleEditExpense"/>
+                <Button text="Delete Expense" onAction="#handleDeleteExpense"/>
+                <Separator orientation="VERTICAL"/>
+                <Label text="Filter by Category:"/>
+                <ComboBox fx:id="categoryFilter" onAction="#handleFilter"/>
+                <Label text="From:"/>
+                <DatePicker fx:id="startDatePicker" onAction="#handleFilter"/>
+                <Label text="To:"/>
+                <DatePicker fx:id="endDatePicker" onAction="#handleFilter"/>
+            </ToolBar>
+
+            <!-- SplitPane containing TableView and PieChart -->
+            <SplitPane orientation="VERTICAL" VBox.vgrow="ALWAYS" dividerPositions="0.3">
+                <items>
+                    <!-- TableView for displaying expenses -->
+                    <TableView fx:id="expenseTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="categoryColumn" text="Category"/>
+                            <TableColumn fx:id="descriptionColumn" text="Description"/>
+                            <TableColumn fx:id="amountColumn" text="Amount"/>
+                            <TableColumn fx:id="dateColumn" text="Date"/>
+                        </columns>
+                        <!-- Custom placeholder when no data is present -->
+                        <placeholder>
+                            <VBox alignment="CENTER" spacing="10">
+                                <Label text="No expenses to display." styleClass="placeholder-label"/>
+                                <Label text="Please add content." styleClass="placeholder-label"/>
+                            </VBox>
+                        </placeholder>
+                    </TableView>
+
+                    <!-- StackPane wrapping PieChart to allow expansion -->
+                    <StackPane VBox.vgrow="ALWAYS">
+                        <PieChart fx:id="expensePieChart"
+                                  prefWidth="600"
+                                  prefHeight="400"
+                                  maxWidth="Infinity"
+                                  maxHeight="Infinity"/>
+                    </StackPane>
+                </items>
+            </SplitPane>
+        </VBox>
+    </center>
+
+    <!-- Bottom content -->
+    <bottom>
+        <Label fx:id="totalAmountLabel">
+            <padding>
+                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+            </padding>
+        </Label>
+    </bottom>
+</BorderPane>

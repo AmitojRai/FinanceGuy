@@ -1,0 +1,26 @@
+.root {
+    -fx-font-family: "Arial";
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.table-view {
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 10;
+}
+
+.table-column-header {
+    -fx-background-color: #f2f2f2;
+    -fx-font-weight: bold;
+}
