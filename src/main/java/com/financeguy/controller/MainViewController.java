@@ -74,23 +74,23 @@ public class MainViewController {
         expenseData.addAll(DatabaseHelper.getAllExpenses());
     }
 
-    //Collects different categories from the database for users to filter through
+    //collects different categories from the database for users to filter through
     private void initializeCategoryFilter() {
-        //Get a set of distinct and normalized categories from all expenses
+        //get a set of distinct and normalized categories from all expenses
         List<String> distinctCategories = DatabaseHelper.getAllExpenses().stream()
                 .map(Expense::getCategory)
                 .distinct()
                 .collect(Collectors.toList());
 
-        //Capitalize the first letter
+        //capitalize the first letter
         List<String> displayCategories = distinctCategories.stream()
                 .map(this::capitalizeFirstLetter)
                 .collect(Collectors.toList());
 
-        //Add an "All" filter option at the top
+        //add an "All" filter option at the top
         displayCategories.add(0, "All");
 
-        //Setting the default category to "All" and making the ComboBox
+        //setting the default category to "All" and making the ComboBox
         categoryFilter.setItems(FXCollections.observableArrayList(displayCategories));
         categoryFilter.setValue("All");  // Default is to show all categories
     }
@@ -118,13 +118,13 @@ public class MainViewController {
 
 
 
-     //Gets the sum of all expenses displayed in the expenseData and shows it in the total amount label
+     //gets the sum of all expenses displayed in the expenseData and shows it in the total amount label
     private void updateTotalAmount() {
         double total = expenseData.stream().mapToDouble(Expense::getAmount).sum();
         totalAmountLabel.setText(String.format("Total Expenses: $%.2f", total));
     }
 
-    //capitalizes the first letter of a string. For aesthetic purposes
+    //capitalizes the first letter of a string. for aesthetic purposes
     private String capitalizeFirstLetter(String str) {
         if (str == null || str.isEmpty()) return str;
         return str.substring(0, 1).toUpperCase() + str.substring(1);
@@ -165,7 +165,7 @@ public class MainViewController {
         TextField amountField = new TextField();
         DatePicker datePicker = new DatePicker(LocalDate.now());
 
-        //If editing an existing expense then we can pre-fill the fields
+        //if editing an existing expense then we can pre-fill the fields
         if (existingExpense != null) {
             categoryField.setText(existingExpense.getCategory());
             descriptionField.setText(existingExpense.getDescription());
@@ -356,7 +356,7 @@ public class MainViewController {
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
 
-        //Get all the expenses from Data Base
+        //get all the expenses from Data Base
         ObservableList<Expense> allExpenses = FXCollections.observableArrayList(DatabaseHelper.getAllExpenses());
 
         //filtering by category with an exception to if “All” is selected
@@ -375,7 +375,7 @@ public class MainViewController {
             allExpenses = allExpenses.filtered(e -> !e.getDate().isAfter(endDate));
         }
 
-        //Update the expense data with the final filtered options
+        //update the expense data with the final filtered options
         expenseData.setAll(allExpenses);
 
         updatePieChart();
