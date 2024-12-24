@@ -22,8 +22,7 @@ public class EditExpenseController {
     private boolean isConfirmed = false;
 
 
-    //Method to handle when user clicks the "save" button
-    //Updates the expense object
+    //Method to handle when user clicks the "save" button. Updates the expense object
     @FXML
     private void handleSave() {
         try {
@@ -33,7 +32,7 @@ public class EditExpenseController {
             double amount = Double.parseDouble(amountField.getText());
             LocalDate date = datePicker.getValue();
 
-            //Condition to check if fields are empty and amount if less than 0.
+            //condition to check if fields are empty and amount if less than 0.
             if (category.isEmpty() || description.isEmpty() || amount <= 0 || date == null) {
                 //show error prompt if condition passes
                 showAlert("Invalid Input", "Please fill all fields correctly.");

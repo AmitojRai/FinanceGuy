@@ -89,7 +89,7 @@ public class Expense {
         return amount;
     }
 
-    //getter method that returns date of when an expense occured
+    //getter method that returns date of when an expense occurred
     public LocalDate getDate() {
         return date.get();
     }

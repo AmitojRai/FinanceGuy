@@ -1,5 +1,4 @@
 package com.financeguy.controller;
-
 import com.financeguy.DatabaseHelper;
 import com.financeguy.model.Expense;
 import javafx.collections.FXCollections;
@@ -10,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -92,9 +90,9 @@ public class MainViewController {
         //Add an "All" filter option at the top
         displayCategories.add(0, "All");
 
-        //Setting to default category to "All" and making the ComboBox
+        //Setting the default category to "All" and making the ComboBox
         categoryFilter.setItems(FXCollections.observableArrayList(displayCategories));
-        categoryFilter.setValue("All");  // Default to showing all categories
+        categoryFilter.setValue("All");  // Default is to show all categories
     }
 
 
@@ -255,7 +253,7 @@ public class MainViewController {
             return;
         }
 
-        //Alerts that we show the user to confirm that they want to proceed with deletion
+        //Alert messages that we show the user to confirm that they want to proceed with deletion
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationAlert.setTitle("Delete Expense");
         confirmationAlert.setHeaderText("Are you sure you want to delete this expense?");
@@ -263,7 +261,7 @@ public class MainViewController {
 
         Optional<ButtonType> result = confirmationAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            //Use your DatabaseHelper method to delete the expense by ID
+            //delete the expense by ID
             DatabaseHelper.deleteExpense(selectedExpense.getId());
             loadExpensesFromDatabase();
             initializeCategoryFilter();
@@ -367,17 +365,17 @@ public class MainViewController {
             allExpenses = allExpenses.filtered(e -> e.getCategory().equals(normalizedCategory));
         }
 
-        // filtering by the start date
+        //filtering by the start date
         if (startDate != null) {
             allExpenses = allExpenses.filtered(e -> !e.getDate().isBefore(startDate));
         }
 
-        // filtering by the end date
+        //filtering by the end date
         if (endDate != null) {
             allExpenses = allExpenses.filtered(e -> !e.getDate().isAfter(endDate));
         }
 
-        // Update the expense data with the final filtered options
+        //Update the expense data with the final filtered options
         expenseData.setAll(allExpenses);
 
         updatePieChart();

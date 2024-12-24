@@ -63,10 +63,6 @@ public class AddExpenseController {
         stage.close();
     }
 
-    //boolean method to check whether the user confirmed adding the expense
-    public boolean isConfirmed() {
-        return isConfirmed;
-    }
 
     //getter method to return expense
     public Expense getExpense() {
