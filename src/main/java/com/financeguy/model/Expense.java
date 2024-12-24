@@ -1,6 +1,4 @@
 package com.financeguy.model;
-
-
 import javafx.beans.property.*;
 import java.time.LocalDate;
 
@@ -27,7 +25,6 @@ public class Expense {
     //constructor when we create an expense before ID
     public Expense(String category, String description, double amount, LocalDate date) {
         this.id = new SimpleIntegerProperty(this, "id");
-        // CALL normalizeCategory(...) here as well
         this.category = new SimpleStringProperty(this, "category", normalizeCategory(category));
         this.description = new SimpleStringProperty(this, "description", description);
         this.amount = new SimpleDoubleProperty(this, "amount", amount);
